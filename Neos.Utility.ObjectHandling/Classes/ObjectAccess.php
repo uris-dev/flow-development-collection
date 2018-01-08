@@ -167,7 +167,7 @@ abstract class ObjectAccess
         $uppercasePropertyName = ucfirst($propertyName);
         $getterMethodNames = ['get' . $uppercasePropertyName, 'is' . $uppercasePropertyName, 'has' . $uppercasePropertyName];
         foreach ($getterMethodNames as $getterMethodName) {
-            if (is_callable([$subject, $getterMethodName])) {
+            if (method_exists($subject, $getterMethodName) && is_callable([$subject, $getterMethodName])) {
                 self::$propertyGetterCache[$cacheIdentifier]['accessorMethod'] = $getterMethodName;
                 return;
             }
